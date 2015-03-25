@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head></h:head>
+    <body>
+        <h:outputLabel value="USTED NO HA INICIADO SESIÓN" 
+                       rendered="#{usuarioBean.verificarSesion() eq false}" />
+        <h:form rendered="#{usuarioBean.verificarSesion()}">			
+            <h:panelGrid columns="2">
+                <h1>Bienvenido Usuario:</h1>
+
+                <h:outputLabel value="#{usuarioBean.usuario.nombre}" />
+
+                <h:commandButton value="Cerrar Sesión"
+                                 action="#{usuarioBean.cerrarSesion()}" />
+            </h:panelGrid>
+
+            <h2>CRUD - Empleados:</h2>
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nombre" />
+                <h:inputText value="#{empleadoBean.empleado.nombres}" />
+
+                <h:outputLabel value="Apellidos" />
+                <h:inputText value="#{empleadoBean.empleado.apellidos}" />
+
+                <h:outputLabel value="Sexo" />
+                <h:selectOneMenu value="#{empleadoBean.empleado.sexo}">
+                    <f:selectItem itemValue="M" itemLabel="MASCULINO"/>
+                    <f:selectItem itemValue="F" itemLabel="FEMENINO"/>
+                </h:selectOneMenu>			
+            </h:panelGrid>
+
+            <h:commandButton actionListener="#{empleadoBean.listar()}" 
+                             value="Listar" />
+            <h:commandButton actionListener="#{empleadoBean.registrar()}" 
+                             value="Registrar" />
+
+            <h:dataTable value="#{empleadoBean.lstEmpleados}" var="emp">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Nombres" />
+                    </f:facet>
+                    <h:outputLabel value="#{emp.nombres}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Apellidos" />
+                    </f:facet>
+                    <h:outputLabel value="#{emp.apellidos}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Sexo" />
+                    </f:facet>
+                    <h:outputLabel value="#{emp.sexo}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Eliminar" />
+                    </f:facet>
+                    <h:commandLink actionListener="#{empleadoBean.eliminar(emp)}"
+                                   value="Eliminar" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Modificar" />
+                    </f:facet>
+                    <h:commandLink action="#{empleadoBean.leer(emp)}"
+                                   value="Modificar" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>MODIFICAR EMPLEADO</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nombres" />
+                <h:inputText value="#{empleadoBean.empleado.nombres}" />
+
+                <h:outputLabel value="Apellidos" />
+                <h:inputText value="#{empleadoBean.empleado.apellidos}" />
+
+                <h:outputLabel value="Sexo" />
+                <h:selectOneMenu value="#{empleadoBean.empleado.sexo}">
+                    <f:selectItem itemValue="M" itemLabel="MASCULINO" />
+                    <f:selectItem itemValue="F" itemLabel="FEMENINO" />
+                </h:selectOneMenu>
+
+                <h:commandButton action="#{empleadoBean.modificar()}"
+                                 value="Modificar" />
+
+                <h:commandButton action="exito" immediate="true" 
+                                 value="Cancelar" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
